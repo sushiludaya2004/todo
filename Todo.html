@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-Application</title>
+    <link rel="shortcut icon" href="https://cdn.pixabay.com/photo/2017/06/10/07/24/note-2389227_960_720.png" type="image/x-icon">
+</head>
+<body style="text-align: center;">
+    <h1>Todo-List</h1>
+    <div id = "Todos">
+        <input type="text" id="value" placeholder="Enter your TODO!">
+        <button onclick="addTodo()">ADD TODO</button>
+        
+    </div>
+</body>
+
+<script>
+    let index = 1;
+    function addTodo(){
+        
+        const getValue = document.getElementById("value").value;
+        if(getValue == "") {
+            alert("Enter a message");
+            return;
+        }
+        const createDiv = document.createElement("div");
+        createDiv.setAttribute("id", "todo-"+index);
+        createDiv.innerHTML = 
+        "<h1 id = h1-"+index+">" + getValue + "</h1> <input type='text' id='userInput-"+index+"' placeholder='Edit your TODO!'><button onclick='editTodo("+index+")'>Edit TODO</button><button onclick=deleteTodo("+index+")>Delete TODO</button>";
+        const addDiv = document.getElementById("Todos");
+        addDiv.appendChild(createDiv);
+        index = index+1;
+        document.getElementById("value").value="";
+    }
+
+    function deleteTodo(index){
+        const deleteId = document.getElementById("todo-"+index);
+        deleteId.parentNode.removeChild(deleteId);
+    }
+
+    function editTodo(index){
+        let edittext = document.getElementById("userInput-"+index).value;
+        if(edittext == "") {
+            alert("Enter a text to edit message");
+            return;
+        }
+        console.log(edittext);
+        let changeText = document.getElementById("h1-"+index);
+        console.log(changeText);
+        changeText.textContent = edittext;
+        document.getElementById("userInput-"+index).value = "";
+
+    }
+</script>
+</html>
